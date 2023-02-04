@@ -3,7 +3,6 @@ import axios from "../../axios";
 import "./row.css";
 import YouTube from "react-youtube";
 import movieTrailer from "movie-trailer";
-import HoverVideoPlayer from "react-hover-video-player";
 
 const base_url = "https://image.tmdb.org/t/p/original/";
 
@@ -70,26 +69,7 @@ const Row = ({ title, fetchUrl, isLargeRow }) => {
           />
         ))}
       </div>
-      {/* <HoverVideoPlayer
-        videoSrc={trailerUrl}
-        pausedOverlay={
-          <img
-            src="thumbnail-image.jpg"
-            alt=""
-            style={{
-              // Make the image expand to cover the video's dimensions
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-            }}
-          />
-        }
-        loadingOverlay={
-          <div className="loading-overlay">
-            <div className="loading-spinner" />
-          </div>
-        }
-      /> */}
+
       {trailerUrl && <YouTube videoId={trailerUrl} opts={opts} />}
     </div>
   );
