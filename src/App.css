@@ -1,3 +1,11 @@
 * {
   margin: 0;
 }
+
+html {
+  overflow-x: hidden;
+}
+
+.app{
+  background-color: #111;
+}
