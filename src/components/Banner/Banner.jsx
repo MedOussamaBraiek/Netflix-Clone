@@ -33,7 +33,7 @@ const Banner = () => {
       style={{
         backgroundImage: `url(${base_url + movie?.backdrop_path}`,
         backgroundSize: "cover",
-        backgroundPosition: "center center",
+        backgroundPosition: " auto",
       }}
     >
       <div className="banner__contents">
