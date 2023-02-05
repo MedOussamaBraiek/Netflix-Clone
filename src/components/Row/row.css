@@ -20,7 +20,8 @@
     object-fit: contain;
     max-height: 100px;
     margin-right: 10px;
-    transition: transform 450ms;
+    transition: all 450ms;
+    z-index: 100;
 }
 
 .row__poster:hover {
@@ -34,4 +35,78 @@
 
 .row__posterLarge:hover{
     transform: scale(1.09);
+}
+
+.card{
+    padding: 1px 1px 10px 1px !important;
+    background-color: #212121 !important;
+    /* background-color: red !important; */
+    display: inline-block;
+    /* width: 500px !important;
+    margin-right: 300px !important; */
+}
+
+.card__buttons{
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 10px 10px 20px;
+}
+
+.card__buttons__left{
+    display: flex;
+}
+
+.card__button{margin-right: 10px;
+    width: 40px;
+    height: 40px;
+    border: 1px solid white;
+    border-radius: 25px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card__18{
+    font-size: 13px;
+    margin-left: 1rem;
+    width: 35px;
+    height: 20px;
+    border: 1px solid white;
+    border-radius: 5px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card__button:hover{
+    color: black;
+    background-color: white;
+    cursor: pointer;
+}
+
+.hide{
+    display: none;
+}
+
+.show{
+    display: block;
+}
+
+.star{
+    margin-left: 0.5rem;
+}
+
+.green{
+    color: rgb(4, 152, 4);
+    font-weight: bold;
+}
+
+.red {
+    color: red;
+}
+
+.youtube__video{
+    z-index: 999;
 }
