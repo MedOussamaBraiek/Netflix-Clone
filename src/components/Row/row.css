@@ -22,6 +22,7 @@
     margin-right: 10px;
     transition: all 450ms;
     z-index: 100;
+    position: relative;
 }
 
 .row__poster:hover {
@@ -42,8 +43,24 @@
     background-color: #212121 !important;
     /* background-color: red !important; */
     display: inline-block;
-    /* width: 500px !important;
-    margin-right: 300px !important; */
+    /* width: 500px !important; */
+    /* position: absolute !important; 
+    opacity: 0; */
+    /* margin-right: 300px !important; */
+}
+
+.h6{
+    font-size: 13px;
+    color: rgb(220, 219, 219);
+}
+.h6 span{
+    font-size: 15px;
+    color: white;
+}
+
+.iframe{
+    height: 220px;
+    width: 100%;
 }
 
 .card__buttons{

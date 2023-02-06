@@ -10,6 +10,7 @@ const Row = ({ title, fetchUrl, isLargeRow }) => {
   const [trailerUrl, setTrailerUrl] = useState("");
   const [id, setId] = useState("");
   const [movie, setMovie] = useState({});
+  const [info, setInfo] = useState({});
   const [isHovered, setIsHovered] = useState(false);
   const [moviesGenres, setGenres] = useState([]);
 
@@ -121,21 +122,40 @@ const Row = ({ title, fetchUrl, isLargeRow }) => {
     }
   };
 
-  // useEffect(() => {
-  //   const fetchDataa = async () => {
-  //     const result = await fetch(
-  //       `http://www.omdbapi.com/?apikey=7d869b1d&t=${movie.name}`
-  //     );
-  //     const moviee = await result.json();
-  //     console.log(moviee);
-  //     setTrailerUrl(moviee.Trailer);
-  //   };
-  //   fetchDataa();
-  // }, [movie.name]);
+  useEffect(() => {
+    const fetchDataa = async () => {
+      const result = await fetch(
+        `http://www.omdbapi.com/?apikey=7d869b1d&t=${movie.name}`
+      );
+      const moviee = await result.json();
+      console.log(moviee);
+      setInfo(moviee);
+      setTrailerUrl(moviee.Trailer);
+    };
+    fetchDataa();
+  }, [movie.name]);
 
   const onReady = (event) => {
     event.target.playVideo();
   };
+
+  // const cardHover = (movie, link) => {
+  //   setMovie(movie);
+  //   let cards = document.querySelectorAll(".card");
+  //   let iframes = document.querySelectorAll(".iframes");
+  //   cards.forEach((card, index) => {
+  //     card.addEventListener("mouseover", function () {
+  //       let vSrc = iframes[index].dataset.video;
+  //       iframes[index].src =
+  //         "https://www.youtube.com/embed/" +
+  //         link.split("=")[1] +
+  //         "?autoplay=1&controls=0&mute=0";
+  //     });
+  //     card.addEventListener("mouseleave", function () {
+  //       iframes[index].src = "";
+  //     });
+  //   });
+  // };
 
   return (
     <div className="row">
@@ -146,8 +166,9 @@ const Row = ({ title, fetchUrl, isLargeRow }) => {
             <img
               onMouseEnter={() => {
                 handleClick(movie, movie.id);
+                // cardHover(movie, trailerUrl);
               }}
-              onMouseLeave={() => setIsHovered(false)}
+              // onMouseLeave={() => setIsHovered(false)}
               onClick={() => handleClick(movie, movie.id)}
               key={movie.id}
               className={`row__poster ${isLargeRow && "row__posterLarge"} `}
@@ -181,10 +202,20 @@ const Row = ({ title, fetchUrl, isLargeRow }) => {
           <YouTube
             className="youtube__video"
             opts={opts}
-            videoId={trailerUrl.split("=")[1]}
+            // videoId={trailerUrl.split("=")[1]}
             autoPlay
             onReady={onReady}
           />
+          {/* <iframe
+                  data-video={`https://www.youtube.com/embed/${
+                    trailerUrl.split("=")[1]
+                  }?autoplay=1&controls=0&mute=0`}
+                  src=""
+                  frameborder="0"
+                  autoPlay
+                  allowFullScreen
+                  className="iframe"
+                ></iframe> */}
           {/* buttons */}
           <div className="card__buttons">
             <div className="card__buttons__left">
@@ -266,16 +297,32 @@ const Row = ({ title, fetchUrl, isLargeRow }) => {
               )}
             </div>
             <div className="d-flex">
-              <h6>Language : </h6> {` (${movie.original_language})`}
+              <h6 className="h6">
+                Language :{" "}
+                <span>{` (${movie.original_language.toUpperCase()})`}</span>
+              </h6>
+            </div>
+          </div>
+          {/* tybe and duration */}
+          <div className="d-flex px-4  mb-1 mt-1">
+            <div className="d-flex">
+              <h6 className="h6">
+                Type :{" "}
+                <span>{` ${info.Type + "  - "}${
+                  info.Type === "series"
+                    ? info.totalSeasons + " seasons"
+                    : info.Runtime
+                }`}</span>
+              </h6>
             </div>
           </div>
           {/* genres */}
-          <div className="d-flex flex-wrap px-4">
+          {/* <div className="d-flex flex-wrap px-4">
             {moviesGenres.map((genre, index) => (
               <div className="mr-3 pr-3">
                 {genre !== undefined && (
                   <div className="d-flex align-items-center">
-                    <h6>{`${genre}  `}</h6>
+                    <h6 className="h6">{`${genre}  `}</h6>
                     {index !== moviesGenres.length - 1 && (
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -292,10 +339,18 @@ const Row = ({ title, fetchUrl, isLargeRow }) => {
                 )}
               </div>
             ))}
+          </div> */}
+          <div className="d-flex flex-wrap px-4">
+            <div className="mr-3 pr-3">
+              <div className="d-flex align-items-center">
+                <h6 className="h6">
+                  <span>{`${info?.Genre}  `}</span>
+                </h6>
+              </div>
+            </div>
           </div>
         </div>
       )}
-
       {/* <div
         style={{
           width: "200px",
